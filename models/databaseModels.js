@@ -39,7 +39,12 @@ const Mode = sequelize.define('mode', {
 const Test = sequelize.define('test', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   timeSpent: { type: DataTypes.STRING },
+  version: { type: DataTypes.STRING },
   createdAt: { type: DataTypes.DATE },
+  ansCount: { type: DataTypes.INTEGER },
+  ansDiff: { type: DataTypes.FLOAT },
+  skpCount: { type: DataTypes.INTEGER },
+  skpDiff: { type: DataTypes.FLOAT },
   score: { type: DataTypes.INTEGER },
 });
 

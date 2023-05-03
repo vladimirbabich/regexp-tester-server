@@ -42,14 +42,11 @@ function testDB() {
 
 function insertTable(dataForDB, { controllerName, method, url }) {
   let promises = [];
-  // console.log(controllerName)
   dataForDB[controllerName].map((el) => {
-    // console.log(el);
     promises.push(
       axios
         .post(url, el)
-        .then(function (response) {
-        })
+        .then(function (response) {})
         .catch(function (error) {
           console.log(error);
         })

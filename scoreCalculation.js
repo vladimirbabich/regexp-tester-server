@@ -1,63 +1,78 @@
 const log = require('./log.ts');
-function calculateScore(testQuestions, timeType, timeSpent) {
+function calculateScoreValues(testQuestions, timeType, timeSpent) {
   const SKIP_PENALTY_DIVIDER = 4;
   const NO_SKIP_BONUS = 200;
   const TIME_BONUS = 10000;
-  const answeredScore = getScore(
+  const minTimeSpent = 1;
+
+  const answeredScoreValues = getScoreValues(
     testQuestions,
     (accum, el) => (el.userAnswer ? ++accum : accum),
     (accum, el) => (el.userAnswer ? accum + el.difficulty : accum)
   );
-  if (Number.isNaN(answeredScore)) {
-    //no answered questions - reject creating
-    return res.json('No answered questions');
-  }
-  let skippedScore = getScore(
+  // if (Number.isNaN(answeredScore)) {
+  //   //no answered questions - reject creating
+  //   return res.json('No answered questions');
+  // }
+  const skippedScoreValues = getScoreValues(
     testQuestions,
     (accum, el) => (!el.userAnswer ? ++accum : accum),
     (accum, el) => (!el.userAnswer ? accum + el.difficulty : accum)
   );
 
-  if (Number.isNaN(skippedScore)) {
+  if (skippedScoreValues.count == 0) {
     //made skippedScore negative NO_SKIP_BONUS to add value into answeredScore as a bonus
-    skippedScore = -1 * NO_SKIP_BONUS;
+    skippedScoreValues.score = -1 * NO_SKIP_BONUS;
   }
 
   const questionScore =
-    skippedScore < 0
-      ? parseInt(answeredScore - skippedScore)
-      : parseInt(answeredScore - skippedScore / SKIP_PENALTY_DIVIDER);
+    skippedScoreValues.count == 0
+      ? parseInt(answeredScoreValues.score - skippedScoreValues.score) * 100
+      : parseInt(
+          answeredScoreValues.score -
+            skippedScoreValues.score / SKIP_PENALTY_DIVIDER
+        ) * 100;
 
-  const answeredCount = testQuestions.reduce(
-    (accum, el) => (el.userAnswer ? ++accum : accum),
-    0
-  );
+  if (Number.isNaN(answeredScoreValues.avgDiff))
+    answeredScoreValues.avgDiff = null;
+  if (Number.isNaN(skippedScoreValues.avgDiff))
+    skippedScoreValues.avgDiff = null;
 
-  return parseInt((timeSpent / answeredCount / 1000) * questionScore);
-  //timeType == 'time'
-  // ? questionScore
-  // : timeSpent < 0
-  // ? questionScore
-  // : TIME_BONUS - timeSpent + questionScore;
+  console.log('score1:');
+  console.log(questionScore);
+  console.log(!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent);
+  return {
+    score: parseInt(
+      (questionScore / (!timeSpent || timeSpent < 1)
+        ? minTimeSpent
+        : timeSpent) *
+        answeredScoreValues.avgDiff *
+        answeredScoreValues.avgDiff
+    ),
+    ansCount: answeredScoreValues.count,
+    ansDiff: answeredScoreValues.avgDiff,
+    skpCount: skippedScoreValues.count,
+    skpDiff: skippedScoreValues.avgDiff,
+  };
 }
 
-function getScore(testQuestions, callbackCounter, callbackSumDiff) {
+function getScoreValues(testQuestions, callbackCounter, callbackSumDiff) {
   const initialValue = 0;
-  const DIFF_MULTIPLIERS = [0, 1, 1.5, 2, 2.5, 4, 5, 7.14, 9.37, 11.11, 15];
-  console.log(testQuestions);
+  const DIFF_MULTIPLIERS = [0, 1, 3, 6, 12, 20, 26, 32, 40, 45, 50];
   const count = testQuestions.reduce(callbackCounter, initialValue);
   const sumDiff = testQuestions.reduce(callbackSumDiff, initialValue);
   const avgDiff = sumDiff / count;
   const scoreForOneQuestion = avgDiff * DIFF_MULTIPLIERS[Math.round(avgDiff)];
+  console.log(testQuestions);
   log(
     'Log',
-    count,
-    sumDiff,
-    avgDiff,
-    scoreForOneQuestion,
-    scoreForOneQuestion * count
+    count
+    // sumDiff,
+    // avgDiff,
+    // scoreForOneQuestion,
+    // scoreForOneQuestion * count
   );
-  return scoreForOneQuestion * count;
+  return { score: scoreForOneQuestion * count, count, avgDiff };
 }
 
-module.exports = calculateScore;
+module.exports = calculateScoreValues;
