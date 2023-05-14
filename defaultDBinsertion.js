@@ -17,11 +17,11 @@ const urlArray = [
     method: 'post',
     url: 'http://localhost:7000/api/question/create',
   },
-  {
-    controllerName: 'test',
-    method: 'post',
-    url: 'http://localhost:7000/api/test/create',
-  },
+  // // {
+  //   controllerName: 'test',
+  //   method: 'post',
+  //   url: 'http://localhost:7000/api/test/create',
+  // },
 ];
 function insertAndWaitDBInsertion(index) {
   let curIndex = index ? index : 0;

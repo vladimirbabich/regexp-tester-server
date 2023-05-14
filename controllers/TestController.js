@@ -13,6 +13,7 @@ class TestController {
     try {
       const testVersion = 'v1';
       const { userId, modeName, timeSpent, testQuestions } = req.body;
+      console.log({ userId, modeName, timeSpent, testQuestions });
       const token = req.updatedToken;
 
       const { timeType, id: modeId } = await Mode.findOne({
@@ -25,8 +26,8 @@ class TestController {
       );
 
       if (userId < 0) return res.json({ userError: 'User not found' });
-      console.log('score');
-      console.log(scoreValues);
+      // console.log('score');
+      // console.log(scoreValues);
       const testDB = await Test.create({
         timeSpent,
         createdAt: new Date(),

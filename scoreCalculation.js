@@ -38,9 +38,9 @@ function calculateScoreValues(testQuestions, timeType, timeSpent) {
   if (Number.isNaN(skippedScoreValues.avgDiff))
     skippedScoreValues.avgDiff = null;
 
-  console.log('score1:');
-  console.log(questionScore);
-  console.log(!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent);
+  // console.log('score1:');
+  // console.log(questionScore);
+  // console.log(!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent);
   return {
     score: parseInt(
       (questionScore / (!timeSpent || timeSpent < 1)
@@ -64,14 +64,14 @@ function getScoreValues(testQuestions, callbackCounter, callbackSumDiff) {
   const avgDiff = sumDiff / count;
   const scoreForOneQuestion = avgDiff * DIFF_MULTIPLIERS[Math.round(avgDiff)];
   console.log(testQuestions);
-  log(
-    'Log',
-    count
-    // sumDiff,
-    // avgDiff,
-    // scoreForOneQuestion,
-    // scoreForOneQuestion * count
-  );
+  // log(
+  //   'Log',
+  //   count
+  //   // sumDiff,
+  //   // avgDiff,
+  //   // scoreForOneQuestion,
+  //   // scoreForOneQuestion * count
+  // );
   return { score: scoreForOneQuestion * count, count, avgDiff };
 }
 

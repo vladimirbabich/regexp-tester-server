@@ -10,7 +10,7 @@ class QuestionController {
     try {
       const { text, task, expectedResult, difficulty, functionName, modes } =
         req.body;
-      const token = req.updatedToken;
+      // const token = req.updatedToken;
 
       const question = await Question.create({
         text,
@@ -26,9 +26,9 @@ class QuestionController {
         questionId: question.id,
       }));
       const modeQuestions = await ModeQuestion.bulkCreate(modeQuestionObjects);
-      return res.json({ message: 'ok', token });
+      return res.json({ message: 'ok'});
     } catch (e) {
-      return res.status(400).json({ error: e, token });
+      return res.status(400).json({ error: e});
     }
   }
   async getAllForMode(req, res) {

@@ -5,6 +5,7 @@ let USERNAME_DIGITS_LENGTH = 5;
 const generateJwt = require('./../controllers/TokenController');
 
 async function createUser() {
+  console.log('CREATE');
   const users = await User.findAll();
   let loopCount = 0;
   function getRandomUserName(users) {
@@ -31,6 +32,7 @@ async function createUser() {
 
 class UserController {
   async login(req, res) {
+    console.log('LOGIN');
     try {
       //for now only nickname comes in
       const { nicknameOrEmail, pass } = req.body;
@@ -57,6 +59,7 @@ class UserController {
     }
   }
   async registration(req, res) {
+    console.log('REGISTR');
     try {
       const { nickname, email, pass } = req.body;
 
@@ -99,11 +102,13 @@ class UserController {
   }
 
   async check(req, res) {
+    console.log('CHECK');
     const token = generateJwt(req.user.id, req.user.nickname);
     return res.json({ token });
   }
 
   async getUniqueNickname(req, res) {
+    console.log('UNIQUE');
     try {
       const user = await createUser();
       // console.log(user);
