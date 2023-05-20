@@ -1,3 +1,4 @@
-import app from '../index';
-require('pg');
-export default app;
+const app = require('../index');
+const { createServer } = require('vercel');
+
+module.exports = createServer(app);
