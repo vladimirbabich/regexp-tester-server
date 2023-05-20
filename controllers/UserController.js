@@ -62,7 +62,7 @@ class UserController {
     console.log('REGISTR');
     try {
       const { nickname, email, pass } = req.body;
-
+      console.log({ nickname, email, pass });
       if (!nickname || nickname?.length < 3) {
         return res.json({
           nickError: 'Nickname should have atleast 3 symbols',

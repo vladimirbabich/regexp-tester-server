@@ -6,7 +6,7 @@ const data = {
     {
       nickname: 'John',
       email: 'John@gmail.com',
-      pass: '123',
+      pass: '123123',
     },
     {
       nickname: 'Frank',
@@ -352,7 +352,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       possibleAnswer: '^Lorem/gm',
       difficulty: 3,
       functionName: 'get',
-      modes: '1,2,3',
+      modes: '1,2',
     },
     {
       text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua(WRONG). Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
@@ -362,7 +362,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       possibleAnswer: 'aliqua$/gm',
       difficulty: 3,
       functionName: 'get',
-      modes: '1,2,3',
+      modes: '1,2',
     },
     {
       text: `[question]
@@ -395,6 +395,16 @@ error
       functionName: 'get',
       modes: '1,2',
     },
+    // {
+    //   text: ``,
+    //   task: '',
+    //   expectedResult: ``,
+    //   // prettier-ignore
+    //   possibleAnswer: '',
+    //   difficulty: ,
+    //   functionName: 'get',
+    //   modes: '3',
+    // },
   ],
   test: [
     {
@@ -466,23 +476,23 @@ error
     {
       userId: 2,
       modeName: 'only-flags',
-      timeSpent: '2222',
+      timeSpent: '100',
       testQuestions: [
         {
           questionId: 4,
           difficulty: 2,
           userAnswer: '[a-z]',
         },
-        {
-          questionId: 5,
-          difficulty: 2,
-          // userAnswer: '[A-Z]/gi',
-        },
-        {
-          questionId: 6,
-          difficulty: 2,
-          // userAnswer: '[0-9]',
-        },
+        // {
+        //   questionId: 5,
+        //   difficulty: 2,
+        //   // userAnswer: '[A-Z]/gi',
+        // },
+        // {
+        //   questionId: 6,
+        //   difficulty: 2,
+        //   // userAnswer: '[0-9]',
+        // },
       ],
     },
     {
@@ -495,11 +505,11 @@ error
           difficulty: 5,
           userAnswer: '[a-z]',
         },
-        {
-          questionId: 5,
-          difficulty: 3,
-          // userAnswer: '[A-Z]/gi',
-        },
+        // {
+        //   questionId: 5,
+        //   difficulty: 3,
+        //   // userAnswer: '[A-Z]/gi',
+        // },
         {
           questionId: 6,
           difficulty: 5,

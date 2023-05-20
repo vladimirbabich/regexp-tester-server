@@ -24,6 +24,8 @@ class TestController {
         timeType,
         timeSpent
       );
+      console.log('scoreValues:');
+      console.log(scoreValues);
 
       if (userId < 0) return res.json({ userError: 'User not found' });
       // console.log('score');
