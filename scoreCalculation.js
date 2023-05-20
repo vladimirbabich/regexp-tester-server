@@ -1,4 +1,4 @@
-const log = require('./log.ts');
+// const log = require('./log.ts');
 function calculateScoreValues(testQuestions, timeType, timeSpent) {
   const SKIP_PENALTY_DIVIDER = 4;
   const NO_SKIP_BONUS = 200;
@@ -73,14 +73,14 @@ function getScoreValues(testQuestions, callbackCounter, callbackSumDiff) {
   const scoreForOneQuestion =
     avgDiff * DIFF_MULTIPLIERS[Math.round(avgDiff ? avgDiff : 0)];
   console.log(testQuestions);
-  log(
-    'Log',
-    count,
-    sumDiff,
-    avgDiff,
-    scoreForOneQuestion,
-    scoreForOneQuestion * count
-  );
+  // log(
+  //   'Log',
+  //   count,
+  //   sumDiff,
+  //   avgDiff,
+  //   scoreForOneQuestion,
+  //   scoreForOneQuestion * count
+  // );
   return {
     score: scoreForOneQuestion * count * count,
     count,
