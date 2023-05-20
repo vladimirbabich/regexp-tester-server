@@ -1,4 +1,4 @@
-const isLocalMode = true;
+const isLocalMode = false;
 
 const { Sequelize } = require('sequelize');
 module.exports = isLocalMode
