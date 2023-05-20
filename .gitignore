@@ -4,3 +4,4 @@ log.ts
 node_modules/
 test.js
 substitutionQuestions.js
+.vercel
