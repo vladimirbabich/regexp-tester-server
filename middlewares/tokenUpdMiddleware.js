@@ -17,7 +17,7 @@ module.exports = function (req, res, next) {
     next();
   } catch (e) {
     //do nothing
-    console.error(e);
+    // console.error(e);
     next();
   }
 };

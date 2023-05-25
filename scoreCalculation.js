@@ -63,7 +63,7 @@ function calculateScoreValues(testQuestions, timeType, timeSpent) {
 
 function getScoreValues(testQuestions, callbackCounter, callbackSumDiff) {
   const initialValue = 0;
-  const DIFF_MULTIPLIERS = [0, 1, 3, 6, 12, 20, 26, 32, 40, 45, 50];
+  const DIFF_MULTIPLIERS = [0, 1, 3, 6, 8, 12, 25, 35, 50, 65, 90];
   const count = testQuestions.reduce(callbackCounter, initialValue);
   const sumDiff = testQuestions.reduce(callbackSumDiff, initialValue);
 

@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
 
 const Question = sequelize.define('question', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  text: { type: DataTypes.STRING },
+  text: { type: DataTypes.TEXT },
   task: { type: DataTypes.STRING },
   expectedResult: { type: DataTypes.STRING },
   possibleAnswer: { type: DataTypes.STRING },
