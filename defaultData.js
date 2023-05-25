@@ -3,34 +3,34 @@ const shortLorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 console.log(questionsData.length)
 const data = {
-  user: [
-    {
-      nickname: 'John',
-      email: 'John@gmail.com',
-      pass: '123123',
-    },
-    {
-      nickname: 'Frank',
-      email: 'Frank@gmail.com',
-      pass: 'adsaASFAFasada',
-    },
-    {
-      nickname: 'Anna',
-      email: 'Anna@gmail.com',
-      pass: '12adASd#@$231233',
-    },
-    {
-      nickname: 'Фома Киняев',
-      email: 'Ingrid@gmail.com',
-      pass: '$2jgoeo22jkf@iILloO0ыфвы',
-    },
-  ],
-  mode: [
-    { mode: 'minutes-5', timeType: 'time' },
-    { mode: 'all-questions', timeType: 'timeless' },
-    { mode: 'only-flags', timeType: 'time' },
-  ],
-  // question: questionsData,
+  // user: [
+  //   {
+  //     nickname: 'John',
+  //     email: 'John@gmail.com',
+  //     pass: '123123',
+  //   },
+  //   {
+  //     nickname: 'Frank',
+  //     email: 'Frank@gmail.com',
+  //     pass: 'adsaASFAFasada',
+  //   },
+  //   {
+  //     nickname: 'Anna',
+  //     email: 'Anna@gmail.com',
+  //     pass: '12adASd#@$231233',
+  //   },
+  //   {
+  //     nickname: 'Фома Киняев',
+  //     email: 'Ingrid@gmail.com',
+  //     pass: '$2jgoeo22jkf@iILloO0ыфвы',
+  //   },
+  // ],
+  // mode: [
+  //   { mode: 'minutes-5', timeType: 'time' },
+  //   { mode: 'all-questions', timeType: 'timeless' },
+  //   { mode: 'only-flags', timeType: 'time' },
+  // ],
+  question: questionsData,
   // test: [
   //   {
   //     userId: 1,
