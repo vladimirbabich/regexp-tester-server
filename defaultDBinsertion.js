@@ -42,10 +42,6 @@ function testDB() {
 
 function insertTable(dataForDB, { controllerName, method, url }) {
   let promises = [];
-  console.log('controllerName');
-  console.log(controllerName);
-  console.log(dataForDB[controllerName]);
-
   dataForDB[controllerName].map((el) => {
     console.log('El:');
     console.log(el);
