@@ -1,4 +1,6 @@
 const { questionsData } = require('./questionsData');
+console.log('questionsData');
+console.log(questionsData);
 const shortLorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 const data = {

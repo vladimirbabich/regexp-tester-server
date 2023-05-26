@@ -3,8 +3,7 @@ const questionsData = [
     text: 'first second third fourth',
     task: 'Remove all line endings',
     expectedResult: 'first second third fourth',
-    // prettier-ignore
-    possibleAnswer: '\n/gm',
+    possibleAnswer: '\\n/gm',
     difficulty: 2,
     functionName: 'remove',
     modes: '1,2',
@@ -24,8 +23,7 @@ const questionsData = [
     task: 'Remove all digits AT THE END of each word',
     expectedResult:
       'level 1st qwerty sum variable urban l33tsp34k eiffel tower best',
-    // prettier-ignore
-    possibleAnswer: '\d*\b/gm',
+    possibleAnswer: '\\d*\\b/gm',
     difficulty: 4,
     functionName: 'remove',
     modes: '1,2',
@@ -97,8 +95,7 @@ const questionsData = [
     text: '1,22,333,4444,55555,666666',
     task: 'Get numbers',
     expectedResult: '1|22|333|4444|55555|666666',
-    // prettier-ignore
-    possibleAnswer: '\d+',
+    possibleAnswer: '\\d+',
     difficulty: 1,
     functionName: 'get',
     modes: '1,2',
@@ -107,8 +104,7 @@ const questionsData = [
     text: '10 -2 1234 -13 -2222 999',
     task: 'Get only negative numbers',
     expectedResult: '-2|-13|-2222',
-    // prettier-ignore
-    possibleAnswer: '-\d*/g',
+    possibleAnswer: '-\\d*/g',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -117,8 +113,7 @@ const questionsData = [
     text: 'Uppercase, lowercase! Again. Uppercase, not-uppercase',
     task: 'Get only words beginning with an Uppercase letter',
     expectedResult: 'Uppercase|Again|Uppercase',
-    // prettier-ignore
-    possibleAnswer: '[A-Z][\w]+/g',
+    possibleAnswer: '[A-Z][\\w]+/g',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -145,8 +140,7 @@ const questionsData = [
     text: '213.12 123,5 32.23 33 12 1 0',
     task: 'Get only positive float numbers',
     expectedResult: '213.12|123,5|32.23',
-    // prettier-ignore
-    possibleAnswer: '\d+[.,]\d+',
+    possibleAnswer: '\\d+[.,]\\d+',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -155,8 +149,7 @@ const questionsData = [
     text: 'label, table, Anabel, Bell, Izabel',
     task: 'Get all words with "el" at the end',
     expectedResult: 'label|Anabel|Izabel',
-    // prettier-ignore
-    possibleAnswer: '\w*el\b/g',
+    possibleAnswer: '\\w*el\\b/g',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -165,8 +158,7 @@ const questionsData = [
     text: 'row 1,   \r\n      ro   w 2!',
     task: 'get all symbols accept space and line ending',
     expectedResult: 'r|o|w|1|,|r|o|w|2|!',
-    // prettier-ignore
-    possibleAnswer: '\S/gm',
+    possibleAnswer: '\\S/gm',
     difficulty: 1,
     functionName: 'get',
     modes: '1,2',
@@ -204,8 +196,7 @@ const questionsData = [
     text: 'row 1,   \r\n      ro   w 2!',
     task: 'Remove all spaces and line endings',
     expectedResult: 'row1,row2!',
-    // prettier-ignore
-    possibleAnswer: '\s/g',
+    possibleAnswer: '\\s/g',
     difficulty: 1,
     functionName: 'remove',
     modes: '1,2',
@@ -214,8 +205,7 @@ const questionsData = [
     text: 'row 1,   \r\n      ro   w 2!',
     task: 'Get all symbols accept space and line ending',
     expectedResult: 'r|o|w|1|,|r|o|w|2|!',
-    // prettier-ignore
-    possibleAnswer: '\S/g',
+    possibleAnswer: '\\S/g',
     difficulty: 1,
     functionName: 'get',
     modes: '1,2',
@@ -225,8 +215,7 @@ const questionsData = [
     task: 'Get all words',
     expectedResult:
       'Lorem|ipsum|dolor|sit|amet|consectetur|adipiscing|elit|sed|do|eiusmod|tempor|incididunt|ut|labore|et|dolore|magna|aliqua',
-    // prettier-ignore
-    possibleAnswer: '\w+/g',
+    possibleAnswer: '\\w+/g',
     difficulty: 2,
     functionName: 'get',
     modes: '1,2',
@@ -244,8 +233,7 @@ const questionsData = [
     text: '[question] {choice} (animal) {fact} error {milk}',
     task: 'Get all words that start and end with a {curly braces}',
     expectedResult: '{choice}|{fact}|{milk}',
-    // prettier-ignore
-    possibleAnswer: '\{\w*\}$/gm',
+    possibleAnswer: '\\{\\w*\\}$/gm',
     difficulty: 6,
     functionName: 'get',
     modes: '1,2',
@@ -254,8 +242,7 @@ const questionsData = [
     text: '[question] {choice} (animal) {fact} error {milk} {and this one}',
     task: 'Get all lines that start and end with a {curly braces}',
     expectedResult: '{choice}|{fact}|{milk}|{and this one}',
-    // prettier-ignore
-    possibleAnswer: '\{.+?\}$/gm',
+    possibleAnswer: '\\{.+?\\}$/gm',
     difficulty: 7,
     functionName: 'get',
     modes: '1,2',
@@ -264,8 +251,7 @@ const questionsData = [
     text: '<!DOCTYPE html>\n  <html lang="en">\n    <head>\n      <meta charset="UTF-8" />\n      <meta http-equiv="X-UA-Compatible" content="IE=edge" />\n      <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n      <title>Document</title>\n    </head>\n  <body>\n    <section>\n      <p>Paragraph 1</p>\n    </section>\n    <section>\n      <p>Paragraph 2</p>\n    </section>\n    <section>\n      <p>Paragraph 3</p>\n    </section>\n  </body>\n</html>',
     task: "Get all tags 'p' with their text inside",
     expectedResult: '<p>Paragraph 1</p>|<p>Paragraph 2</p>|<p>Paragraph 3</p>',
-    // prettier-ignore
-    possibleAnswer: '<p>(.*)<\/p>/gm',
+    possibleAnswer: '<p>(.*)<\\/p>/gm',
     difficulty: 6,
     functionName: 'get',
     modes: '1,2',
@@ -274,8 +260,7 @@ const questionsData = [
     text: '{\n  "circleG": {"radius":5,"size":2,"color":"green","fill":false},\n  "circleR": {"radius":15,"size":8,"color":"red","fill":true},\n  "circleB": {"radius":2,"size":1,"color":"blue","fill":false},\n  "circleP": {"radius":7,"size":7,"color":"purple","fill":false}\n}',
     task: 'Get all "radius" keys and their values',
     expectedResult: '"radius":5|"radius":15|"radius":2|"radius":7',
-    // prettier-ignore
-    possibleAnswer: '"radius":\d+/gm',
+    possibleAnswer: '"radius":\\d+/gm',
     difficulty: 6,
     functionName: 'get',
     modes: '1,2',
@@ -302,8 +287,7 @@ const questionsData = [
     text: 'name name1 name999 name!@# names',
     task: 'Get all the words "name" and numbers after them(if they exists)',
     expectedResult: 'name|name1|name999|name|name',
-    // prettier-ignore
-    possibleAnswer: 'name\d*/g',
+    possibleAnswer: 'name\\d*/g',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -312,8 +296,7 @@ const questionsData = [
     text: 'word name1 safe999 idea!@# words',
     task: 'Get all words that end with numbers',
     expectedResult: 'name1|safe999',
-    // prettier-ignore
-    possibleAnswer: '[a-z]+\d+/g',
+    possibleAnswer: '[a-z]+\\d+/g',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -322,8 +305,7 @@ const questionsData = [
     text: 'word name1 safe999 idea!@# words',
     task: 'Get all words that end with one digit or none',
     expectedResult: 'word|name1|safe9|idea|words',
-    // prettier-ignore
-    possibleAnswer: '[a-z]+\d?/g',
+    possibleAnswer: '[a-z]+\\d?/g',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -332,8 +314,7 @@ const questionsData = [
     text: 'word1 word2 word3 word10 word25 word999 word102 word word12345',
     task: 'Get all words with 2 digits at the end',
     expectedResult: 'word10|word25|word99|word10|word12',
-    // prettier-ignore
-    possibleAnswer: 'word\d{2}/g',
+    possibleAnswer: 'word\\d{2}/g',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -342,8 +323,7 @@ const questionsData = [
     text: 'word1 word2 word3 word10 word25 word999 word102 word word12345',
     task: 'Get all words with 2 or more digits at the end',
     expectedResult: 'word10|word25|word999|word102|word12345',
-    // prettier-ignore
-    possibleAnswer: 'word\d{2,}/g',
+    possibleAnswer: 'word\\d{2,}/g',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -352,8 +332,7 @@ const questionsData = [
     text: 'word\nword1\nword22\nword333\nword4444\nword55555',
     task: 'Get all words with 2-4 digits at the end',
     expectedResult: 'word22|word333|word4444',
-    // prettier-ignore
-    possibleAnswer: 'word\d{2,4}$/gm',
+    possibleAnswer: 'word\\d{2,4}$/gm',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -389,8 +368,7 @@ const questionsData = [
     text: '1r2i3g4h5t6 A7N8S9W0ER!',
     task: 'Get all symbols accept digits',
     expectedResult: 'r|i|g|h|t| |A|N|S|W|E|R|!',
-    // prettier-ignore
-    possibleAnswer: '\D/g',
+    possibleAnswer: '\\D/g',
     difficulty: 1,
     functionName: 'get',
     modes: '1,2',
@@ -399,8 +377,7 @@ const questionsData = [
     text: '$140 &200 €15 %24 $20',
     task: 'Get all numbers starting with a dollar sign',
     expectedResult: '$140|$20',
-    // prettier-ignore
-    possibleAnswer: '\$\d+/g',
+    possibleAnswer: '\\$\\d+/g',
     difficulty: 3,
     functionName: 'get',
     modes: '1,2',
@@ -410,8 +387,7 @@ const questionsData = [
     task: 'Get all links',
     expectedResult:
       'https://www.example.com|http://www.rightlink.com|www.google.com|retester.xyz',
-    // prettier-ignore
-    possibleAnswer: '^(?:https?:\/\/)?(www\.)?\w+\.com$/gm',
+    possibleAnswer: '^(?:https?:\\/\\/)?(www\\.)?\\w+\\.com$/gm',
     difficulty: 7,
     functionName: 'get',
     modes: '1,2',
@@ -420,8 +396,7 @@ const questionsData = [
     text: 'film golf head deck scarf bandage feedback',
     task: 'Get words containing only letters [a-m], but not containing any letters [n-z]',
     expectedResult: 'film|head|deck|feedback',
-    // prettier-ignore
-    possibleAnswer: '\b[a-m]+\b/g',
+    possibleAnswer: '\\b[a-m]+\\b/g',
     difficulty: 5,
     functionName: 'get',
     modes: '1,2',
@@ -439,8 +414,7 @@ const questionsData = [
     text: '€250 $1000 £432 ₿1 ¥1234 $212 €38',
     task: 'Get dollar values without "$"',
     expectedResult: '1000|212',
-    // prettier-ignore
-    possibleAnswer: '(?<=\$)\d+/g',
+    possibleAnswer: '(?<=\\$)\\d+/g',
     difficulty: 6,
     functionName: 'get',
     modes: '1,2',
@@ -449,8 +423,7 @@ const questionsData = [
     text: 'file.txt image.png video.mp4 image.jpg secondimage.png anim.gif text.js imagename.png',
     task: 'Get png filenames without ".png"',
     expectedResult: 'image|secondimage|imagename',
-    // prettier-ignore
-    possibleAnswer: '\w+(?=\.png)/g',
+    possibleAnswer: '\\w+(?=\\.png)/g',
     difficulty: 6,
     functionName: 'get',
     modes: '1,2',
@@ -459,8 +432,7 @@ const questionsData = [
     text: 'file.txt image.png bmp.bmp video.mp4 image.jpg secondimage.png anim.gif text.js imagename.png',
     task: 'Get image filenames without format ".???"',
     expectedResult: 'image|bmp/image|secondimage|imagename',
-    // prettier-ignore
-    possibleAnswer: '\w+((?=\.png)|(?=\.jpg)|(?=\.bmp))/g',
+    possibleAnswer: '\\w+((?=\\.png)|(?=\\.jpg)|(?=\\.bmp))/g',
     difficulty: 7,
     functionName: 'get',
     modes: '1,2',
@@ -469,8 +441,7 @@ const questionsData = [
     text: '05-12-2021 2021-05-12 2021/05/12 2021.05.12  05.12.2021 2021,05,12',
     task: 'Get all dates that start with year',
     expectedResult: '2021-05-12|2021/05/12|2021.05.12|2021,05,12',
-    // prettier-ignore
-    possibleAnswer: '\d{4}.\d{2}.\d{2}/g',
+    possibleAnswer: '\\d{4}.\\d{2}.\\d{2}/g',
     difficulty: 4,
     functionName: 'get',
     modes: '1,2',
@@ -480,8 +451,7 @@ const questionsData = [
     task: 'Get correct emails',
     expectedResult:
       'example@mail.xyz|myemail12345@gmail.com|d35truct0r@yahoo.com|asdjlkafjias322f@gmail.nl|johndoe321@mail.com',
-    // prettier-ignore
-    possibleAnswer: '^\w+@\w+\.\w{2,3}/gm',
+    possibleAnswer: '^\\w+@\\w+\\.\\w{2,3}/gm',
     difficulty: 5,
     functionName: 'get',
     modes: '1,2',
@@ -490,10 +460,11 @@ const questionsData = [
     text: '!wr0ngnickname\nwr0ngnickname\nnickname123456\n321emankcin\nn1ckname\njohn123\nwrongagain',
     task: 'Get lines with that start with letters and end with digits',
     expectedResult: 'nickname123456|john123',
-    possibleAnswer: '^[a-zA-Z]+[0-9]+$/gm',
+    possibleAnswer: `^[a-zA-Z]+[0-9]+$/gm`,
     difficulty: 5,
     functionName: 'get',
     modes: '1,2',
   },
 ];
+
 module.exports = { questionsData };

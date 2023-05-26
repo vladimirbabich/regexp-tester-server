@@ -8,8 +8,15 @@ const {
 class QuestionController {
   async create(req, res) {
     try {
-      const { text, task, expectedResult, difficulty, functionName, modes } =
-        req.body;
+      const {
+        text,
+        task,
+        expectedResult,
+        possibleAnswer,
+        difficulty,
+        functionName,
+        modes,
+      } = req.body;
       // const token = req.updatedToken;
 
       const question = await Question.create({
@@ -17,6 +24,7 @@ class QuestionController {
         task,
         expectedResult,
         difficulty,
+        possibleAnswer,
         functionName,
         createdAt: new Date(),
       });
@@ -26,9 +34,9 @@ class QuestionController {
         questionId: question.id,
       }));
       const modeQuestions = await ModeQuestion.bulkCreate(modeQuestionObjects);
-      return res.json({ message: 'ok'});
+      return res.json({ message: 'ok' });
     } catch (e) {
-      return res.status(400).json({ error: e});
+      return res.status(400).json({ error: e });
     }
   }
   async getAllForMode(req, res) {

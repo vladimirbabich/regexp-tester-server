@@ -17,14 +17,14 @@ module.exports = isLocalMode
         },
       }
     )
-  : new Sequelize('verceldb', 'default', '5ARYmOZxPlD7', {
+  : new Sequelize('verceldb', 'default', 'PYryqeZb2g3n', {
       dialect: 'postgres',
       dialectOptions: {
         ssl: {
           require: true,
         },
       },
-      host: 'ep-hidden-star-040978-pooler.us-east-1.postgres.vercel-storage.com',
+      host: 'ep-red-dawn-074452-pooler.us-east-1.postgres.vercel-storage.com',
       port: 5432,
       logging: false,
       timezone: '+00:00',

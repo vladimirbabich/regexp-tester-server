@@ -2,16 +2,16 @@ const axios = require('axios');
 const data = require('./defaultData');
 
 const urlArray = [
-  {
-    controllerName: 'user',
-    method: 'post',
-    url: 'http://localhost:7000/api/user/',
-  },
-  {
-    controllerName: 'mode',
-    method: 'post',
-    url: 'http://localhost:7000/api/mode/create',
-  },
+  // {
+  //   controllerName: 'user',
+  //   method: 'post',
+  //   url: 'http://localhost:7000/api/user/',
+  // },
+  // {
+  //   controllerName: 'mode',
+  //   method: 'post',
+  //   url: 'http://localhost:7000/api/mode/create',
+  // },
   {
     controllerName: 'question',
     method: 'post',
@@ -44,7 +44,7 @@ function insertTable(dataForDB, { controllerName, method, url }) {
   let promises = [];
   console.log('controllerName');
   console.log(controllerName);
-  // console.log(dataForDB);
+  console.log(dataForDB[controllerName]);
 
   dataForDB[controllerName].map((el) => {
     console.log('El:');

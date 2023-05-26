@@ -15,7 +15,7 @@ const Question = sequelize.define('question', {
   text: { type: DataTypes.TEXT },
   task: { type: DataTypes.STRING },
   expectedResult: { type: DataTypes.STRING },
-  possibleAnswer: { type: DataTypes.STRING },
+  possibleAnswer: { type: DataTypes.TEXT },
   difficulty: { type: DataTypes.INTEGER },
   functionName: { type: DataTypes.STRING },
   createdAt: { type: DataTypes.DATE },
