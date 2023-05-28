@@ -1,2 +1,2 @@
 # regexp-tester-server
-Server of REtester app
+Server for [retester.tech](https://www.retester.tech "Retester")
