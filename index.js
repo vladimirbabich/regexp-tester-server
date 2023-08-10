@@ -6,7 +6,7 @@ const models = require('./models/databaseModels');
 const cors = require('cors');
 const router = require('./models/routes');
 const testDB = require('./default-manipulations/defaultDBinsertion');
-const PORT = process.env.PORT || 5000;
+const LOCAL_PORT = process.env.LOCAL_PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,7 +20,7 @@ const start = async () => {
     // await sequelize.sync({ force: true });
     // testDB();
     app.listen(PORT, () => {
-      console.log('server started on: ' + PORT);
+      console.log('server started on: ' + LOCAL_PORT);
     });
   } catch (e) {
     await sequelize.close();

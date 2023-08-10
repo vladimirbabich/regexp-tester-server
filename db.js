@@ -1,37 +1,29 @@
 const isLocalMode = false;
-
-const { Sequelize } = require('sequelize');
-module.exports = isLocalMode
-  ? new Sequelize(
-      process.env.DB_NAME,
-      process.env.DB_USER,
-      process.env.DB_PASS,
-      {
-        dialect: 'postgres',
+const settings = ((isLocalMode) => {
+  return isLocalMode
+    ? {
+        name: process.env.LOCAL_DB_NAME,
+        user: process.env.LOCAL_DB_USER,
+        pass: process.env.LOCAL_DB_PASS,
+        host: process.env.LOCAL_DB_HOST,
+        port: process.env.LOCAL_DB_PORT,
+      }
+    : {
+        name: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        pass: process.env.DB_PASS,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        logging: false,
-        timezone: '+00:00',
-        define: {
-          timestamps: false,
-        },
-      }
-    )
-  : new Sequelize('verceldb', 'default', 'PYryqeZb2g3n', {
-      dialect: 'postgres',
-      dialectOptions: {
-        ssl: {
-          require: true,
-        },
-      },
-      host: 'ep-red-dawn-074452-pooler.us-east-1.postgres.vercel-storage.com',
-      port: 5432,
-      logging: false,
-      timezone: '+00:00',
-      define: {
-        timestamps: false,
-      },
-    });
-
-//changed file structure
-// !!!! added default data
+      };
+})();
+const { Sequelize } = require('sequelize');
+module.exports = new Sequelize(settings.name, settings.user, settings.pass, {
+  dialect: 'postgres',
+  host: settings.host,
+  port: settings.port,
+  logging: false,
+  timezone: '+00:00',
+  define: {
+    timestamps: false,
+  },
+});
