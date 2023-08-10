@@ -59,14 +59,16 @@ class UserController {
         createdAt,
         updatedAt: createdAt,
       });
-      const token = generateJwt(user.id, nickname);
       if (!user) {
+        console.error('not user');
         return res.json({ DBError: 'Problem with database, try later please' });
       }
+      const token = generateJwt(user.id, nickname);
       return res.json({ token });
     } catch (e) {
       console.error(e);
-      return res.json({ DBError: 'Problem with database, try later please' });
+      console.error(token);
+      return res.json({ DBError: 'Problem with database, try later please!' });
     }
   }
 
