@@ -1,9 +1,4 @@
-const {
-  Question,
-  User,
-  ModeQuestion,
-  Mode,
-} = require('../models/databaseModels');
+const { Question, User, ModeQuestion, Mode } = require('../databaseModels');
 
 class QuestionController {
   async create(req, res) {
@@ -17,7 +12,6 @@ class QuestionController {
         functionName,
         modes,
       } = req.body;
-      // const token = req.updatedToken;
 
       const question = await Question.create({
         text,

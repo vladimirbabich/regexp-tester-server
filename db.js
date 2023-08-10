@@ -32,3 +32,6 @@ module.exports = isLocalMode
         timestamps: false,
       },
     });
+
+//changed file structure
+// !!!! added default data

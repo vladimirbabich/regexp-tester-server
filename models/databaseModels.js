@@ -48,12 +48,41 @@ const Test = sequelize.define('test', {
   score: { type: DataTypes.INTEGER },
 });
 
+//---------------------------------------
+
+const Quiz = sequelize.define('quiz', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING },
+  description: { type: DataTypes.TEXT },
+});
+
+const QuizQuestion = sequelize.define('quiz-question', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  question: { type: DataTypes.TEXT },
+  options: { type: DataTypes.TEXT },
+  answers: { type: DataTypes.TEXT },
+  difficulty: { type: DataTypes.INTEGER },
+});
+
+const UserQuiz = sequelize.define('user_quiz', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  timeSpent: { type: DataTypes.STRING },
+  score: { type: DataTypes.INTEGER },
+  createdAt: { type: DataTypes.DATE },
+});
+
 const TestQuestion = sequelize.define('test_question', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 const ModeQuestion = sequelize.define('mode_question', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
+
+Quiz.hasMany(QuizQuestion);
+QuizQuestion.belongsTo(Quiz);
+
+  Quiz.belongsToMany(User, { through: UserQuiz });
+  User.belongsToMany(Quiz, { through: UserQuiz });
 
 Test.belongsToMany(Question, { through: TestQuestion });
 Question.belongsToMany(Test, { through: TestQuestion });
@@ -78,4 +107,7 @@ module.exports = {
   Test,
   TestQuestion,
   ModeQuestion,
+  Quiz,
+  QuizQuestion,
+  UserQuiz,
 };

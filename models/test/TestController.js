@@ -5,15 +5,18 @@ const {
   Answer,
   ModeQuestion,
   User,
-} = require('../models/databaseModels');
-const calculateScoreValues = require('../scoreCalculation');
+} = require('../databaseModels');
+const calculateScoreValues = require('../../utils/scoreCalculation');
 
 class TestController {
   async create(req, res) {
     try {
       const testVersion = 'v1';
-      const { userId, modeName, timeSpent, testQuestions } = req.body;
-      console.log({ userId, modeName, timeSpent, testQuestions });
+      const userId = req.userId;
+      if (!userId || userId < 1)
+        return res.status(500).json({ userError: 'User not found' });
+
+      const { modeName, timeSpent, testQuestions } = req.body;
       const token = req.updatedToken;
 
       const { timeType, id: modeId } = await Mode.findOne({
@@ -24,12 +27,6 @@ class TestController {
         timeType,
         timeSpent
       );
-      console.log('scoreValues:');
-      console.log(scoreValues);
-
-      if (userId < 0) return res.json({ userError: 'User not found' });
-      // console.log('score');
-      // console.log(scoreValues);
       const testDB = await Test.create({
         timeSpent,
         createdAt: new Date(),
@@ -89,28 +86,28 @@ class TestController {
 
       const finishedPromise = await Promise.all(promises)
         .then((res) => {
-          // console.log('res');
-          // console.log(res);
           //create testQuestion
           uniqueAnswers.forEach((uniqueAnswer) => {
             uniqueAnswer.ids.forEach(async (id) => {
-              return await TestQuestion.create({
-                testId: testDB.id,
-                questionId: testQuestions[id].questionId,
-                answerId: uniqueAnswer.answerId || null,
-              });
+              try {
+                return await TestQuestion.create({
+                  testId: testDB.id,
+                  questionId: testQuestions[id].questionId,
+                  answerId: uniqueAnswer.answerId || null,
+                });
+              } catch (error) {
+                return undefined;
+              }
             });
           });
           return { message: 'ok' };
         })
         .catch((error) => {
-          console.log('PROMISE ERROR');
           console.error(error);
-          return { message: 'PROMISE ERROR' };
+          return { message: 'ERROR 523' };
         });
-      return res.json({ message: finishedPromise.message, token });
+      return res.json({ message: finishedPromise.message, token, userId });
     } catch (e) {
-      console.log('Function ERROR');
       console.error(e);
       return res.status(400).json(e);
     }
@@ -118,23 +115,21 @@ class TestController {
 
   async getAllForMode(req, res) {
     try {
-      const { modeName, limit, offset } = req.query;
+      const { modeName, limit } = req.query;
       const token = req.updatedToken;
-
       const mode = await Mode.findOne({ where: { mode: modeName } }); //get mode with his ID to create
-      // console.log(mode);
       const tests = await Test.findAll({
         where: { modeId: mode.id },
         order: [['score', 'DESC']],
-        limit: limit,
+        limit: limit > 0 ? limit : 10,
         // offset,
       });
       const count = await Test.count({ where: { modeId: mode.id } });
-      // console.log('count');
-      // console.log(count);
       const modifiedTests = tests.map(async (el) => {
         const user = await User.findOne({ where: { id: el.userId } });
-        if (!user) return res.json({ userError: 'User not found' });
+        if (!user) {
+          return undefined;
+        }
         return {
           id: el.id,
           timeSpent: el.timeSpent,
@@ -145,17 +140,15 @@ class TestController {
           ansDiff: el.ansDiff,
           skpCount: el.skpCount,
           skpDiff: el.skpDiff,
-          username: user?.nickname || 'hui',
+          username: user?.nickname || 'unknown',
         };
       });
+
       Promise.all(modifiedTests).then((result) => {
-        // console.log('result');
-        // console.log(result);
-        const tests = result;
+        const tests = result.filter((el) => el);
         return res.json({ tests, count, token });
       });
     } catch (e) {
-      console.log('testController ERROR');
       console.error(e);
       return res.json(e);
     }

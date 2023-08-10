@@ -16,15 +16,15 @@ function calculateScoreValues(testQuestions, timeType, timeSpent) {
     (accum, el) => (!el.userAnswer ? ++accum : accum),
     (accum, el) => (!el.userAnswer ? accum + el.difficulty : accum)
   );
-  if (answeredScoreValues.count < 1)
-    console.log('SHOULD NOT CREATE INSTANCE IN DB');
+  if (answeredScoreValues.count < 1) {
+    // console.log('SHOULD NOT CREATE INSTANCE IN DB');
+    return;
+  }
   if (skippedScoreValues.count == 0) {
     //made skippedScore negative NO_SKIP_BONUS to add value into answeredScore as a bonus
     skippedScoreValues.score =
       BASE_NO_SKIP_BONUS * answeredScoreValues.multiplier;
   }
-  console.log('my: ' + answeredScoreValues.score);
-
   const questionScore =
     skippedScoreValues.count == 0
       ? parseInt((answeredScoreValues.score - skippedScoreValues.score) * 100)
@@ -34,21 +34,8 @@ function calculateScoreValues(testQuestions, timeType, timeSpent) {
             100
         );
 
-  console.log('questionScore: ' + questionScore);
-  console.log({
-    timeSpent: timeSpent,
-    ansDiff: answeredScoreValues.avgDiff,
-    before:
-      questionScore / (!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent),
-    score: parseInt(
-      (questionScore /
-        (!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent)) *
-        answeredScoreValues.avgDiff *
-        answeredScoreValues.avgDiff
-    ),
-  });
   return {
-    score: parseInt(
+    score: Math.round(
       (questionScore /
         (!timeSpent || timeSpent < 1 ? minTimeSpent : timeSpent)) *
         answeredScoreValues.avgDiff *
@@ -72,15 +59,7 @@ function getScoreValues(testQuestions, callbackCounter, callbackSumDiff) {
   const multiplier = avgDiff ? count * avgDiff : null;
   const scoreForOneQuestion =
     avgDiff * DIFF_MULTIPLIERS[Math.round(avgDiff ? avgDiff : 0)];
-  console.log(testQuestions);
-  // log(
-  //   'Log',
-  //   count,
-  //   sumDiff,
-  //   avgDiff,
-  //   scoreForOneQuestion,
-  //   scoreForOneQuestion * count
-  // );
+
   return {
     score: scoreForOneQuestion * count * count,
     count,

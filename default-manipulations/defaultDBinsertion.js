@@ -4,24 +4,28 @@ const data = require('./defaultData');
 const urlArray = [
   // {
   //   controllerName: 'user',
-  //   method: 'post',
   //   url: 'http://localhost:7000/api/user/',
   // },
-  // {
-  //   controllerName: 'mode',
-  //   method: 'post',
-  //   url: 'http://localhost:7000/api/mode/create',
-  // },
+  {
+    controllerName: 'mode',
+    url: 'http://localhost:7000/api/mode/create',
+  },
   {
     controllerName: 'question',
-    method: 'post',
     url: 'http://localhost:7000/api/question/create',
   },
-  // {
-  //   controllerName: 'test',
-  //   method: 'post',
-  //   url: 'http://localhost:7000/api/test/create',
-  // },
+  {
+    controllerName: 'quiz',
+    url: 'http://localhost:7000/api/quiz/create',
+  },
+  {
+    controllerName: 'test',
+    url: 'http://localhost:7000/api/test/create',
+  },
+  {
+    controllerName: 'userQuiz',
+    url: 'http://localhost:7000/api/user-quiz/create',
+  },
 ];
 function insertAndWaitDBInsertion(index) {
   let curIndex = index ? index : 0;
@@ -40,19 +44,15 @@ function testDB() {
   insertAndWaitDBInsertion(0);
 }
 
-function insertTable(dataForDB, { controllerName, method, url }) {
+function insertTable(dataForDB, { controllerName, url }) {
   let promises = [];
   dataForDB[controllerName].map((el) => {
-    console.log('El:');
-    console.log(el);
     promises.push(
       axios
         .post(url, el)
         .then(function (response) {})
         .catch(function (error) {
-          console.log(el);
-          console.log('--------------------------------');
-          console.log(error);
+          console.error(error);
         })
     );
   });

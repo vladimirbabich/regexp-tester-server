@@ -1,6 +1,6 @@
 const Router = require('express');
 const router = new Router();
-const modeController = require('../controllers/ModeController');
+const modeController = require('./ModeController');
 
 router.post('/create', modeController.create);
 

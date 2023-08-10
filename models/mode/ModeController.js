@@ -1,4 +1,4 @@
-const { Mode } = require('../models/databaseModels');
+const { Mode } = require('../databaseModels');
 const USERNAME_DIGITS_LENGTH = 5;
 
 class UserController {
