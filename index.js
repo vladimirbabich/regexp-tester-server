@@ -1,14 +1,26 @@
 require('dotenv').config();
 const express = require('express');
 const sequelize = require('./db');
-const pg = require('pg');
-const models = require('./models/databaseModels');
 const cors = require('cors');
 const router = require('./models/routes');
 const testDB = require('./default-manipulations/defaultDBinsertion');
 const LOCAL_PORT = process.env.LOCAL_PORT || 5000;
 const app = express();
-app.use(cors());
+
+const whitelist = [
+  'https://retester.tech/',
+  'https://regexp-tester.vercel.app',
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api', router);
 
