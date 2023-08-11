@@ -11,7 +11,7 @@ const app = express();
 const whitelist = [
   'https://retester.tech',
   'https://regexp-tester.vercel.app',
-  // 'http://localhost:3000',
+  'http://localhost:3000',
 ];
 const corsOptions = {
   origin: function (origin, callback) {
