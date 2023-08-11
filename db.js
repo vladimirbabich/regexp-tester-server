@@ -2,8 +2,8 @@ const isLocalMode = false;
 function getSettings(isLocal) {
   console.log(process.env.DB_NAME);
   console.log(process.env.DB_USER);
-  console.log(process.env.DB_PASS);
-  console.log(process.env.DB_HOST);
+  console.log(process.env.POSTGRES_PASSWORD);
+  console.log(process.env.POSTGRES_HOST);
   console.log(process.env.DB_PORT);
 
   return isLocalMode
@@ -17,7 +17,7 @@ function getSettings(isLocal) {
     : {
         name: process.env.DB_NAME,
         user: process.env.DB_USER,
-        pass: POSTGRES_PASSWORD,
+        pass: process.env.POSTGRES_PASSWORD,
         host: process.env.POSTGRES_HOST,
         port: process.env.DB_PORT,
       };
