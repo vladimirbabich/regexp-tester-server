@@ -9,11 +9,13 @@ const LOCAL_PORT = process.env.LOCAL_PORT || 5000;
 const app = express();
 
 const whitelist = [
-  'https://retester.tech/',
+  'https://retester.tech',
   'https://regexp-tester.vercel.app',
+  'http://localhost:3000',
 ];
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
