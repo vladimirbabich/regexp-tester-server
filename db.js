@@ -1,6 +1,5 @@
 const isLocalMode = false;
 function getSettings(isLocal) {
-  console.log(`isLocalMode:${isLocalMode}`);
   return isLocalMode
     ? {
         name: process.env.LOCAL_DB_NAME,
