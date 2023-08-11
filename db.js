@@ -1,5 +1,6 @@
 const isLocalMode = false;
-const settings = ((isLocalMode) => {
+function getSettings(isLocal) {
+  console.log(`isLocalMode:${isLocalMode}`);
   return isLocalMode
     ? {
         name: process.env.LOCAL_DB_NAME,
@@ -15,7 +16,9 @@ const settings = ((isLocalMode) => {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
       };
-})();
+}
+const settings = getSettings(isLocalMode);
+
 const { Sequelize } = require('sequelize');
 module.exports = new Sequelize(settings.name, settings.user, settings.pass, {
   dialect: 'postgres',

@@ -3,12 +3,10 @@ const { User, UserQuiz, Quiz } = require('../databaseModels');
 class UserQuizController {
   async create(req, res) {
     try {
-      let userId = req.userId;
+      const user = req.user;
       const { timeSpent, score, quizId } = req.body;
       const token = req.updatedToken;
-      if (!userId && !token) return res.status(500).json('User not found');
-      const user = await User.findOne({ where: { id: userId } });
-      if (!user) return res.status(500).json('User not found');
+      if (!user && !token) return res.status(500).json('User not found');
 
       const quiz = await Quiz.findOne({ where: { id: quizId } });
       if (!quizId || !quiz) return res.status(500).json('Quiz not found');
@@ -18,7 +16,9 @@ class UserQuizController {
           msg: 'The result was not saved, Your score is 0 points. Try again!',
           token: token,
         });
-      const variant = await UserQuiz.findOne({ where: { userId, quizId } });
+      const variant = await UserQuiz.findOne({
+        where: { userId: user.id, quizId },
+      });
       if (variant) {
         if (variant.score < score) {
           variant.score = score;
@@ -40,19 +40,20 @@ class UserQuizController {
         createdAt: new Date(),
         score,
         quizId,
-        userId,
+        userId: user.id,
       });
 
       if (userQuiz)
         return res.json({
           msg: 'Your results was saved!',
           token,
-          userId,
+          user,
         });
 
       return res.json({
         msg: 'Problem with saving results',
         token,
+        user,
       });
     } catch (e) {
       console.error(e);

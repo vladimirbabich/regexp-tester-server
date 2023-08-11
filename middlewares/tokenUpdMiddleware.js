@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const updatedToken = generateJwt(decoded.id, decoded.nickname);
     req.updatedToken = updatedToken;
-    req.userId = decoded.id;
+    req.user = { id: decoded.id };
     next();
   } catch (e) {
     next();

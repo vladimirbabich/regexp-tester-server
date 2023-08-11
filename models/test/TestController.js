@@ -12,12 +12,12 @@ class TestController {
   async create(req, res) {
     try {
       const testVersion = 'v1';
-      const userId = req.userId;
-      if (!userId || userId < 1)
+      const user = req.user;
+      const token = req.updatedToken;
+      if (!user.id && !token)
         return res.status(500).json({ userError: 'User not found' });
 
       const { modeName, timeSpent, testQuestions } = req.body;
-      const token = req.updatedToken;
 
       const { timeType, id: modeId } = await Mode.findOne({
         where: { mode: modeName },
@@ -30,7 +30,7 @@ class TestController {
       const testDB = await Test.create({
         timeSpent,
         createdAt: new Date(),
-        userId,
+        userId: user.id,
         modeId,
         version: testVersion,
         score: scoreValues.score,
@@ -106,7 +106,11 @@ class TestController {
           console.error(error);
           return { message: 'ERROR 523' };
         });
-      return res.json({ message: finishedPromise.message, token, userId });
+      return res.json({
+        message: finishedPromise.message,
+        token,
+        user,
+      });
     } catch (e) {
       console.error(e);
       return res.status(400).json(e);
@@ -116,7 +120,6 @@ class TestController {
   async getAllForMode(req, res) {
     try {
       const { modeName, limit } = req.query;
-      const token = req.updatedToken;
       const mode = await Mode.findOne({ where: { mode: modeName } }); //get mode with his ID to create
       const tests = await Test.findAll({
         where: { modeId: mode.id },
@@ -146,7 +149,7 @@ class TestController {
 
       Promise.all(modifiedTests).then((result) => {
         const tests = result.filter((el) => el);
-        return res.json({ tests, count, token });
+        return res.json({ tests, count, token: req.updatedToken });
       });
     } catch (e) {
       console.error(e);

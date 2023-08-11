@@ -4,8 +4,6 @@ const calculateScoreValues = require('../../utils/scoreCalculation');
 class QuizController {
   async create(req, res) {
     try {
-      const userId = req.userId; //in the future this function would be used by any user to create custom quiz
-
       const { title, description, questions } = req.body;
       if (!title || !questions || questions.length === 0)
         return res.status(500).json('Error: incorrect data');

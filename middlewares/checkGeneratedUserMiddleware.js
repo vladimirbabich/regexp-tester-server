@@ -10,8 +10,7 @@ module.exports = async function (req, res, next) {
       }
     } else {
       const genId = req.headers['gen-user'];
-      const newUserId = await checkGenIdAndCreate(genId);
-      req.userId = newUserId;
+      req.user = await checkGenIdAndCreate(genId);
       next();
     }
   } catch (e) {
@@ -21,16 +20,15 @@ module.exports = async function (req, res, next) {
 };
 
 async function checkGenIdAndCreate(genId) {
-  let usernameDigitsLength = 5;
   try {
     if (genId) {
-      const user = await User.findOne({ where: { id: genId } }); //findById(genId);
+      const user = await User.findOne({ where: { id: genId } });
       if (user) {
-        return user.id;
+        return { id: user.id };
       }
     }
     const newUser = await createUser();
-    return newUser.id;
+    return { id: newUser.id, nickname: newUser.nickname };
   } catch (e) {
     console.error(e);
     return undefined;
@@ -38,6 +36,7 @@ async function checkGenIdAndCreate(genId) {
 
   async function createUser() {
     const users = await User.findAll();
+    let usernameDigitsLength = 5;
     let loopCount = 0;
 
     function getRandomUserName(users) {
