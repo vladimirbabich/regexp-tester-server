@@ -11,7 +11,7 @@ const app = express();
 const whitelist = [
   'https://retester.tech',
   'https://regexp-tester.vercel.app',
-  'http://localhost:3000',
+  // 'http://localhost:3000',
 ];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -30,10 +30,12 @@ app.use('/api', router);
 const start = async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.drop({ force: true }); //only if  need to insert default test data into DB
+    //only if  need to insert default test data into DB
+    // await sequelize.drop({ force: true });
     // console.log('All tables dropped!');
     // await sequelize.sync({ force: true });
     // testDB();
+
     app.listen(LOCAL_PORT, () => {
       console.log('server started on: ' + LOCAL_PORT);
     });
@@ -46,3 +48,5 @@ const start = async () => {
 start();
 
 module.exports = app;
+
+//to recreate db - uncomment 14, 34-37,  remove corsOptions from 26,
