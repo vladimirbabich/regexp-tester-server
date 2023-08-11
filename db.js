@@ -19,6 +19,11 @@ const settings = ((isLocalMode) => {
 const { Sequelize } = require('sequelize');
 module.exports = new Sequelize(settings.name, settings.user, settings.pass, {
   dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+    },
+  },
   host: settings.host,
   port: settings.port,
   logging: false,

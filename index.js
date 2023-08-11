@@ -32,7 +32,7 @@ const start = async () => {
     // console.log('All tables dropped!');
     // await sequelize.sync({ force: true });
     // testDB();
-    app.listen(PORT, () => {
+    app.listen(LOCAL_PORT, () => {
       console.log('server started on: ' + LOCAL_PORT);
     });
   } catch (e) {
