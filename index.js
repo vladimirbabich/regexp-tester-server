@@ -11,7 +11,7 @@ const app = express();
 const whitelist = ['https://retester.tech', 'https://regexp-tester.vercel.app'];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (origin === undefined || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
