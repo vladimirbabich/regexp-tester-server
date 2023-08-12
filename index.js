@@ -8,7 +8,23 @@ const testDB = require('./default-manipulations/defaultDBinsertion');
 const LOCAL_PORT = process.env.LOCAL_PORT || 5000;
 const app = express();
 
-app.use(cors());
+const whitelist = [
+  'https://retester.tech',
+  'https://regexp-tester.vercel.app',
+  'http://localhost:3000',
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log(origin);
+    console.log(whitelist);
+    if (origin === undefined || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api', router);
 
