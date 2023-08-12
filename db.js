@@ -1,5 +1,12 @@
 const isLocalMode = false;
 function getSettings(isLocal) {
+  console.log(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.POSTGRES_PASSWORD,
+    process.env.POSTGRES_HOST,
+    process.env.DB_PORT
+  );
   return isLocalMode
     ? {
         name: process.env.LOCAL_DB_NAME,
