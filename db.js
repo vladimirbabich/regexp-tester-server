@@ -16,11 +16,11 @@ function getSettings(isLocal) {
         port: process.env.LOCAL_DB_PORT,
       }
     : {
-        name: process.env.DB_NAME,
-        user: process.env.DB_USER,
+        name: process.env.POSTGRES_DATABASE,
+        user: process.env.POSTGRES_USER,
         pass: process.env.POSTGRES_PASSWORD,
         host: process.env.POSTGRES_HOST,
-        port: process.env.DB_PORT,
+        port: process.env.POSTGRES_PORT,
       };
 }
 const settings = getSettings(isLocalMode);
